@@ -1,6 +1,6 @@
 var http = require('http');
 var dispatch = require('dispatch');
-
+var mongoose = require(mongoose);
 
 var server = http.createServer(
 			dispatch({

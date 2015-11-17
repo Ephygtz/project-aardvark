@@ -13,6 +13,7 @@
   "author": "'Ephraim'",
   "license": "MIT",
   "dependencies": {
-    "dispatch": "^1.0.0"
+    "dispatch": "^1.0.0",
+    "mongoose": "^4.2.6"
   }
 }
