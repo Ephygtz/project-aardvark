@@ -9,6 +9,12 @@ mongoose.connect('mongodb://localhost/project-aardvark');
 var express = require('express');
 var app = express();
 
+app.use(function(req, res, next) {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, content-type, Accept');
+	next();
+});
+
 //Express Middleware
 var bodyParser = require('body-parser');
 
