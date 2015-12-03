@@ -15,6 +15,10 @@ app.use(function(req, res, next) {
   next();
 });
 
+//Express settings
+app.set('views', './views');
+app.set('view engine', 'jade');
+
 //Express Middleware
 var bodyParser = require('body-parser');
 
