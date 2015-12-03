@@ -1,13 +1,18 @@
+//Express
+var express = require('express');
+var cons = require('consolidate');
+var app = express();
 var http = require('http');
+
+//Express Middleware
+var bodyParser = require('body-parser');
+
 
 //Include Mongoose
 var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/project-aardvark');
 
-//Express
-var express = require('express');
-var app = express();
 
 //Allow CORS
 app.use(function(req, res, next) {
@@ -17,11 +22,16 @@ app.use(function(req, res, next) {
 });
 
 //Express settings
+app.engine('html', cons.liquid);
+
 app.set('views', './views');
-app.set('view engine', 'jade');
+app.set('view engine', 'html');
+
 
 //Express Middleware
-var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 //define our schema
 var movieSchema = mongoose.Schema({
@@ -39,9 +49,6 @@ var movieSchema = mongoose.Schema({
 //compile our model
 var Movie = mongoose.model('Movie', movieSchema);
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
 
 app.get('/movies', function(req, res) {
   Movie.find()
