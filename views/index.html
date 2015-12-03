@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Movies Listing Site</title>
+  </head>
+  <body>
+    <h1>Movies Listing</h1>
+    <table>
+      <thead>
+        <th>Titles</th>
+        <th>Year Of Release</th>
+        <th>Ratings</th>
+      </thead>
+      <tbody>
+        {%for movie in movies%}
+        <tr>
+          <td>{{movie.title | upcase}}</td>
+          <td>{{movie.year_of_release}}</td>
+          <td>{{movie.rating}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </body>
+</html>
