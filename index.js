@@ -1,5 +1,5 @@
 var http = require('http');
-var dispatch = require('dispatch');
+
 //Include Mongoose
 var mongoose = require('mongoose');
 
@@ -9,6 +9,7 @@ mongoose.connect('mongodb://localhost/project-aardvark');
 var express = require('express');
 var app = express();
 
+//Allow CORS
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, content-type, Accept');
@@ -43,13 +44,16 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/movies', function(req, res) {
-  Movie.find(function(err, movies) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(movies);
-    }
-  });
+  Movie.find()
+    .select('title year_of_release rating')
+    .exec(function(err, movies) {
+      if (err) {
+        console.log(err);
+      } else {
+         res.render('index', {'movies': movies});
+        // res.json(movies);
+      }
+    });
 });
 
 app.post('/movies/new', function(req, res) {
@@ -99,10 +103,12 @@ app.delete('/movies/:id', function(request, response) {
   movieId = request.params.id;
 
   //Delete the movie from Mongodb
-  Movie.remove({_id: movieId}, function(err) {
+  Movie.remove({
+    _id: movieId
+  }, function(err) {
     if (err) return console.log(err);
 
-      response.send('movie was deleted');
+    response.send('movie was deleted');
   });
 });
 
