@@ -49,6 +49,11 @@ var movieSchema = mongoose.Schema({
 //compile our model
 var Movie = mongoose.model('Movie', movieSchema);
 
+app.get('/movies/new', function(request, response) {
+
+  response.render('new');
+
+});
 
 app.get('/movies', function(req, res) {
   Movie.find()
@@ -57,13 +62,17 @@ app.get('/movies', function(req, res) {
       if (err) {
         console.log(err);
       } else {
-         res.render('index', {'movies': movies});
+        res.render('index', {
+          'movies': movies
+        });
         // res.json(movies);
       }
     });
 });
 
-app.post('/movies/new', function(req, res) {
+
+
+app.post('/movies', function(req, res) {
   console.log(req.body);
   formdata = req.body;
 
@@ -85,7 +94,9 @@ app.get('/movies/:id', function(request, response) {
   Movie.findById(movieId, function(err, movie) {
     if (err) return console.log(err);
 
-    response.render('detail', {'movie': movie});
+    response.render('detail', {
+      'movie': movie
+    });
     // response.json(movie);
   });
 });

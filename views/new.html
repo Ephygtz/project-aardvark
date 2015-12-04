@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>{{movie.title}}</title>
+</head>
+
+<body>
+  <h1>This is the New view</h1>
+
+  <form role="form" action="/movies" method="post">
+    <div class="row">
+      <div class="input-group">
+        <label for="">Title:</label>
+        <br>
+        <input type="text" name="title" placeholder="Title">
+        <br>
+        <label for="">Director:</label>
+        <br>
+        <input type="text" name="director" placeholder="Director">
+        <br>
+        <label for="">Rating:</label>
+        <br>
+        <input type="number" name="rating" placeholder="Rating">
+        <br>
+        <span class="input-group-btn">
+          <input type="submit" class="btn btn-primary" value="Submit">
+        </span>
+      </div>
+    </div>
+  </form>
+
+</body>
+
+</html>
