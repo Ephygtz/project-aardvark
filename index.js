@@ -85,7 +85,8 @@ app.get('/movies/:id', function(request, response) {
   Movie.findById(movieId, function(err, movie) {
     if (err) return console.log(err);
 
-    response.json(movie);
+    response.render('detail', {'movie': movie});
+    // response.json(movie);
   });
 });
 
@@ -101,7 +102,7 @@ app.put('/movies/:id', function(request, response) {
     movie.save(function(err, movie) {
       if (err) return console.log(err);
 
-      response.json(movie);
+      // response.json(movie);
     });
   });
 });

@@ -15,7 +15,7 @@
       <tbody>
         {%for movie in movies%}
         <tr>
-          <td>{{movie.title | upcase}}</td>
+          <td><a href="/movies/{{movie._id}}">{{movie.title | upcase}}</a></td>
           <td>{{movie.year_of_release}}</td>
           <td>{{movie.rating}}</td>
         </tr>
