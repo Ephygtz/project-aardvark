@@ -55,6 +55,23 @@ app.get('/movies/new', function(request, response) {
 
 });
 
+app.get('/movies/:id/edit', function(request, response) {
+
+  // response.render('edit');
+  movieId = request.params.id;
+
+  //retrieve the movie from mongodb
+  Movie.findById(movieId, function(err, movie) {
+    if (err) return console.log(err);
+
+    response.render('edit', {
+      'movie': movie
+    });
+    // response.json(movie);
+  });
+
+});
+
 app.get('/movies', function(req, res) {
   Movie.find()
     .select('title year_of_release rating')
@@ -113,7 +130,7 @@ app.put('/movies/:id', function(request, response) {
     movie.save(function(err, movie) {
       if (err) return console.log(err);
 
-      // response.json(movie);
+      response.redirect(movie);
     });
   });
 });
