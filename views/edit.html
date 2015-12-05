@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>{{movie.title}}</title>
+</head>
+
+<body>
+  <h1>This is the New view</h1>
+
+  <form role="form" action="/movies/{{movie._id}}" method="put">
+    <div class="row">
+      <div class="input-group">
+        <label for="">Title:</label>
+        <br>
+        <input type="text" name="title" placeholder="Title" value="{{movie.title}}">
+        <br>
+        <label for="">Director:</label>
+        <br>
+        <input type="text" name="director"  value="{{movie.director}}">
+        <br>
+        <label for="">Rating:</label>
+        <br>
+        <input type="number" name="rating" placeholder="Rating" value="{{movie.rating}}">
+        <br>
+        <br>
+        <label for="">Movie Id:</label>
+        <br>
+        <input type="text" name="director"  value="{{movie.id}}">
+        <br>
+        <label for="">Year Of Release:</label>
+        <br>
+        <input type="text" name="director"  value="{{movie.year_of_release}}">
+        <br>
+        <span class="input-group-btn">
+          <input type="submit" class="btn btn-primary" value="Submit">
+        </span>
+      </div>
+    </div>
+  </form>
+
+</body>
+
+</html>
