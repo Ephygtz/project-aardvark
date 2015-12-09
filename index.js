@@ -150,7 +150,7 @@ app.put('/movies/:id', function(request, response) {
   updateMovie('PUT', request, response);
 });
 
-app.delete('/movies/:id', function(request, response) {
+function deleteMovie(method, request, response) {
   movieId = request.params.id;
 
   //Delete the movie from Mongodb
@@ -158,9 +158,20 @@ app.delete('/movies/:id', function(request, response) {
     _id: movieId
   }, function(err) {
     if (err) return console.log(err);
-
-    response.send('movie was deleted');
+    if (method === 'GET') {
+      response.redirect('/movies');
+    } else {
+      response.send('Movie was deleted');
+    }
   });
+}
+
+app.get('/movies/:id/delete', function(request, response) {
+  deleteMovie('GET', request, response);
+});
+
+app.delete('/movies/:id', function(request, response) {
+  deleteMovie('DELETE', request, response);
 });
 
 app.listen(8081, function() {

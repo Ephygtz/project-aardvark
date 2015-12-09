@@ -5,11 +5,13 @@
     <title>{{movie.title}}</title>
   </head>
   <body>
+    {% include 'navbar' %}
     <h1>{{movie.title}}</h1>
     <p>Release Date: {{movie.year_of_release}}</p>
     <p>Movie ID: {{movie.id}}</p>
     <p>Rating: {{movie.rating}}</p>
     <a href="/movies/{{movie._id}}/edit">Edit Movie</a>
+    <a href="/movies/{{movie._id}}/delete">Delete Movie</a>
 
   </body>
 </html>
