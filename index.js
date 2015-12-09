@@ -118,21 +118,36 @@ app.get('/movies/:id', function(request, response) {
   });
 });
 
-app.put('/movies/:id', function(request, response) {
+
+function updateMovie(method, request, response) {
   movieId = request.params.id;
   userRating = request.body.rating;
+  userTitle = request.body.title;
 
   //Update the movie from Mongodb
   Movie.findById(movieId, function(err, movie) {
     if (err) return console.log(err);
 
     movie.rating = userRating;
+    movie.title = userTitle;
     movie.save(function(err, movie) {
       if (err) return console.log(err);
-
-      response.redirect(movie);
+      if (method === 'POST') {
+        response.json(movie);
+      } else {
+        res.redirect('/movies/' + movie._id);
+      }
     });
   });
+}
+
+app.post('/movies/:id/edit', function(request, response) {
+  updateMovie('POST', request, response);
+  console.log('succesfully updated')
+});
+
+app.put('/movies/:id', function(request, response) {
+  updateMovie('PUT', request, response);
 });
 
 app.delete('/movies/:id', function(request, response) {
