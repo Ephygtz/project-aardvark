@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 var cons = require('consolidate');
 var http = require('http');
+var path = require('path');
 
 //passport
 var cookieParser = require('cookie-parser');
@@ -21,11 +22,13 @@ mongoose.connect('mongodb://localhost/project-aardvark');
 //Allow CORS
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, content-type, Accept');
   next();
 });
 
-//Express settings
+//View engine setup
+app.set('views', path.join(__dirname, 'views'));
 app.engine('html', cons.liquid);
 
 app.set('views', './views');
@@ -48,9 +51,11 @@ app.use(passport.session());
 
 //Include routes
 var moviesRoutes = require('./routes/movies');
-var usersRoutes = require('./routes/user')
+var usersRoutes = require('./routes/user');
+var indexRoutes = require('./routes/index')
 app.use(moviesRoutes);
 app.use(usersRoutes);
+app.use(indexRoutes);
 
 // passport config
 var User = require('./models/user');

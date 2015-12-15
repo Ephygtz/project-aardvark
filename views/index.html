@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MOst kick-ass movies online</title>
+  </head>
+  <body>
+    {% include 'navbar' %}
+    {% if user %}
+      <h1>Welcome Back</h1>
+    {% else %}
+      <a href="/login">Login</a>
+    {% endif %}
+  </body>
+</html>

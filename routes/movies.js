@@ -55,7 +55,7 @@ function updateMovie(method, request, response) {
         movie.title = userTitle;
         movie.save(function (err, movie) {
             if (err) return console.log(err);
-            if (method === 'POST') {
+            if (method === 'POST' || method === 'PUT' ) {
                 response.json(movie);
             } else {
                 res.redirect('/movies/' + movie._id);
