@@ -41,5 +41,11 @@ router.route('/login')
     failureRedirect: '/login'
   }));
 
+router.route('/logout')
+  .get(function(req, res) {
+    req.logout();
+    res.render('/');
+  })
+
 
 module.exports = router;
